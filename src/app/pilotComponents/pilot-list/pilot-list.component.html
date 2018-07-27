@@ -1,8 +1,32 @@
-<p>
-  pilot-list works!
-</p>
+<br>
+<button (click)="createNewPilot()">Add new</button>
 
-<table>
+<form *ngIf="isAdd" class="card" #form="ngForm">
+  <label>First Name</label>
+  <input 
+    #firstNameInput = "ngModel"
+    [(ngModel)]="newPilot.FirstName" 
+    name="firstNameInput"
+    required
+    minlength="3">
+  <div *ngIf="firstNameInput.invalid && firstNameInput.dirty">
+    <div *ngIf="firstNameInput.errors.required">
+        Field can't be empty!
+    </div>
+    <div *ngIf="firstNameInput.errors.minlength">
+        small string
+    </div>
+  </div>
+  <label>Last Name</label>
+  <input [(ngModel)]="newPilot.LastName" name="lastName">
+  <label>Birthdate</label>
+  <input [(ngModel)]="newPilot.Birthdate" name="birthdate">
+  <label>Experience</label>
+  <input [(ngModel)]="newPilot.Experience" name="experience">
+  <button (click)="addPilot(form)" type="submit">Add</button>
+</form>
+
+<table class="table">
   <thead>
     <tr>
       <th>Id</th>
@@ -10,6 +34,7 @@
       <th>Last Name</th>
       <th>Birthdate</th>
       <th>Experience</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +44,7 @@
       <td>{{pilot.lastName}}</td>
       <td>{{pilot.birthdate}}</td>
       <td>{{pilot.experience}}</td>
+      <td><button (click)="navigateToDetail(pilot.id)">Detail</button></td>
     </tr>
   </tbody>
 </table>

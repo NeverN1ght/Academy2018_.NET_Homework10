@@ -21,12 +21,7 @@ export class PilotDataLoadService {
 
   addNewPilot(pilot: Pilot) {
     const headers = new HttpHeaders().set('content-type', 'application/json');
-    let body = {
-      firstName: pilot.FirstName,
-      lastName: pilot.LastName,
-      birthdate: pilot.Birthdate,
-      experience: pilot.Experience
-    };
+    let body = pilot;
     return this.http.post<Pilot>(BASE_URL + 'pilots/', body, {
       headers
     });
@@ -34,12 +29,7 @@ export class PilotDataLoadService {
 
   updatePilotById(id: number, pilot: Pilot) {
     const headers = new HttpHeaders().set('content-type', 'application/json');
-    let body = {
-      firstName: pilot.FirstName,
-      lastName: pilot.LastName,
-      birthdate: pilot.Birthdate,
-      experience: pilot.Experience
-    };
+    let body = pilot;
     return this.http.put<Pilot>(BASE_URL + 'pilots/' + id, body, {
       headers
     });

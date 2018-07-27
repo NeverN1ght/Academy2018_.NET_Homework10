@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PilotDataLoadService } from '../../modules/shared/services/pilot-data-load.service';
 import { Pilot } from '../../modules/shared/interfaces/pilot';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,41 +13,28 @@ export class PilotDetailComponent implements OnInit {
 
   pilot: Pilot;
   id: number;
+  isReadonly: boolean = true;
 
-  constructor(private dataservice: PilotDataLoadService) { }
+  constructor(private dataservice: PilotDataLoadService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-  }
-
-  showPilotById(id){
-    this.dataservice.getPilotById(id).subscribe(data => this.pilot = data);
-  }
-
-  addPilot() {
-    //fix this later
-    let pilot: Pilot = {
-      Id: 0,
-      FirstName: "Nicko",
-      LastName: "Nikitovich",
-      Birthdate: "1990-02-05T00:00:00",
-      Experience: 6
-    }
-    this.dataservice.addNewPilot(pilot).subscribe(result => console.log(result));
+    this.id = this.route.snapshot.params['id'];
+    this.dataservice.getPilotById(this.id).subscribe(data => this.pilot = data);
   }
 
   deletePilot() {
-    this.dataservice.deletePilotById(1).subscribe(result => console.log(result));
+    this.dataservice.deletePilotById(this.id).subscribe(result => console.log(result));
   }
 
-  updatePilot() {
-    let pilot: Pilot = {
-      Id: 0,
-      FirstName: "Fixed",
-      LastName: "Fixedovich",
-      Birthdate: "1990-02-05T00:00:00",
-      Experience: 10
+  editPilot() {
+    if (this.isReadonly == true) {
+      this.isReadonly = false;
     }
-    this.dataservice.updatePilotById(3, pilot).subscribe(result => console.log(result));
+  }
+
+  updatePilot(id: number) {
+    this.dataservice.updatePilotById(id, this.pilot).subscribe(result => console.log(result));
+    this.isReadonly = true;
   }
 }
 

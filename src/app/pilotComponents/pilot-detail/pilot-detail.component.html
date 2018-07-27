@@ -1,18 +1,19 @@
-<p>
-  pilot-detail works!
-</p>
+<br>
 
+<div *ngIf="pilot != undefined" class="card">
+  <label>Id: {{pilot.id}}</label>
+  <label>First Name:</label>
+  <input [(ngModel)]="pilot.firstName" [readonly]="isReadonly">
+  <label>Last Name:</label>
+  <input [(ngModel)]="pilot.lastName" [readonly]="isReadonly">
+  <label>Birthdate:</label>
+  <input type="datetime" [(ngModel)]="pilot.birthdate" [readonly]="isReadonly">
+  <label>Experience:</label>
+  <input [(ngModel)]="pilot.experience" [readonly]="isReadonly">
+</div>
 
-<input [(ngModel)]="id">
-<button (click)="showPilotById(id)">Get by id</button>
-
-<!-- <h4>Id: {{pilot.id}}</h4>
-<h4>First Name: {{pilot.firstName}}</h4>
-<h4>Last Name: {{pilot.lastName}}</h4>
-<h4>Birthdate: {{pilot.birthdate}}</h4>
-<h4>Experience: {{pilot.experience}}</h4> -->
-
-<button (click)="addPilot()">Add</button>
 <button (click)="deletePilot()">Delete</button>
-<button (click)="updatePilot()">Update</button>
+
+<button (click)="editPilot()" *ngIf="isReadonly">Edit</button>
+<button (click)="updatePilot(pilot.id)" *ngIf="!isReadonly">Save changes</button>
 

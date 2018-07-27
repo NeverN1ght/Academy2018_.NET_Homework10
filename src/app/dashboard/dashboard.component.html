@@ -1,0 +1,17 @@
+<header>
+  <div class="container">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary btn-lg" (click)="navigateToAirplanes()">Airplanes</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="navigateToAirplaneTypes()">AirplaneTypes</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="navigateToPilots()">Pilots</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="navigateToStewardesses()">Stewardesses</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="navigateToCrews()">Crews</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="navigateToFlights()">Flights</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="navigateToDepartures()">Departures</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="navigateToTickets()">Tickets</button>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

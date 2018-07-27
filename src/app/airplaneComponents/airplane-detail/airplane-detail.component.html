@@ -1,3 +1,18 @@
-<p>
-  airplane-detail works!
-</p>
+<br>
+
+<div *ngIf="airplane != undefined">
+  <label>Id: {{airplane.id}}</label>
+  <label>Name:</label>
+  <input [(ngModel)]="airplane.name" [readonly]="isReadonly">
+  <label>Type:</label>
+  <input [(ngModel)]="airplane.type" [readonly]="isReadonly">
+  <label>Exploitation term:</label>
+  <input [(ngModel)]="airplane.exploitationTerm" [readonly]="isReadonly">
+  <label>Release date:</label>
+  <input [(ngModel)]="airplane.releaseDate" [readonly]="isReadonly">
+</div>
+
+<button (click)="deleteAirplane()">Delete</button>
+
+<button (click)="editAirplane()" *ngIf="isReadonly">Edit</button>
+<button (click)="updateAirplane(airplane.id)" *ngIf="!isReadonly">Save changes</button>

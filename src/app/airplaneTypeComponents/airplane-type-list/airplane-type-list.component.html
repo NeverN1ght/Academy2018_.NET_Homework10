@@ -1,3 +1,46 @@
-<p>
-  airplane-type-list works!
-</p>
+<br>
+<button (click)="createNewAirplaneType()">Add new</button>
+
+<form *ngIf="isAdd" #form="ngForm">
+  <label>Airplane model</label>
+  <input 
+    name="airplaneModel"
+    #airplaneModelInput = "ngModel"
+    [(ngModel)]="newAirplaneType.airplaneModel" 
+    required
+    minlength="3">
+  <div *ngIf="airplaneModelInput.invalid && airplaneModelInput.dirty">
+    <div *ngIf="airplaneModelInput.errors.required">
+        Field can't be empty!
+    </div>
+    <div *ngIf="airplaneModelInput.errors.minlength">
+        small string
+    </div>
+  </div>
+  <label>Seats count</label>
+  <input [(ngModel)]="airplaneType.seatsCount" name="seatsCount">
+  <label>Carrying capacity</label>
+  <input [(ngModel)]="airplaneType.carryingCapacity" name="carryingCapacity">
+  <button (click)="addAirplaneType(form)" type="submit">Add</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Airplane model/th>
+      <th>Seats count</th>
+      <th>Carrying capacity</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let airplaneType of airplaneTypes">
+      <td>{{airplaneType.id}}</td>
+      <td>{{airplaneType.airplaneModel}}</td>
+      <td>{{airplaneType.seatsCount}}</td>
+      <td>{{airplaneType.carryingCapacity}}</td>
+      <td><button (click)="navigateToDetail(airplaneType.id)">Detail</button></td>
+    </tr>
+  </tbody>
+</table>

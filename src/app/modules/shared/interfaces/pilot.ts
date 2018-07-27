@@ -3,5 +3,5 @@ export interface Pilot {
   FirstName: string;
   LastName: string;
   Birthdate: string;
-  Experience: number;
+  Experience: string;
 }

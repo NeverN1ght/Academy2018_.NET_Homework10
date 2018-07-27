@@ -1,3 +1,16 @@
-<p>
-  airplane-type-detail works!
-</p>
+<br>
+
+<div *ngIf="airplaneType != undefined">
+  <label>Id: {{airplaneType.id}}</label>
+  <label>Airplane model:</label>
+  <input [(ngModel)]="airplaneType.airplaneModel" [readonly]="isReadonly">
+  <label>Carrying capacity:</label>
+  <input [(ngModel)]="airplaneType.carryingCapacity" [readonly]="isReadonly">
+  <label>Seats count:</label>
+  <input [(ngModel)]="airplaneType.seatsCount" [readonly]="isReadonly">
+</div>
+
+<button (click)="deleteAirplaneType()">Delete</button>
+
+<button (click)="editAirplaneType()" *ngIf="isReadonly">Edit</button>
+<button (click)="updateAirplaneType(airplaneType.id)" *ngIf="!isReadonly">Save changes</button>

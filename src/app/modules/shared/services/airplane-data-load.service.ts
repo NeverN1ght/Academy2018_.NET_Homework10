@@ -11,11 +11,11 @@ export class AirplaneDataLoadService {
   constructor(private http: HttpClient) { }
 
   getAirplanes() {
-    return this.http.get<Airplane>(BASE_URL + 'airplanes/');
+    return this.http.get<Airplane[]>(BASE_URL + 'airplanes/');
   }
 
   getAirplaneById(id: number) {
-    return this.http.get<Airplane>(BASE_URL + 'airplane/' + id);
+    return this.http.get<Airplane>(BASE_URL + 'airplanes/' + id);
   }
 
   addNewAirlane(airplane: Airplane) {
@@ -39,14 +39,14 @@ export class AirplaneDataLoadService {
       releaseDate: airplane.ReleaseDate,
       exploitationTerm: airplane.ExploitationTerm
     };
-    return this.http.put(BASE_URL + 'airplanes/' + id, body, {
+    return this.http.put<Airplane>(BASE_URL + 'airplanes/' + id, body, {
       headers
     });
   }
 
   deleteAirplaneById(id: number) {
     const headers = new HttpHeaders().set('content-type', 'application/json');
-    return this.http.delete(BASE_URL + 'airplanes/' + id, {
+    return this.http.delete<Airplane>(BASE_URL + 'airplanes/' + id, {
       headers
     });
   }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../app/modules/shared/shared.module';
+import { RoutingModule } from '../app/modules/routing/routing.module';
 
 import { AppComponent } from './app.component';
 import { PilotListComponent } from './pilotComponents/pilot-list/pilot-list.component';
@@ -21,6 +22,7 @@ import { FlightDetailComponent } from './flightComponents/flight-detail/flight-d
 import { FlightListComponent } from './flightComponents/flight-list/flight-list.component';
 import { DepartureListComponent } from './departureComponents/departure-list/departure-list.component';
 import { DepartureDetailComponent } from './departureComponents/departure-detail/departure-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +42,15 @@ import { DepartureDetailComponent } from './departureComponents/departure-detail
     FlightDetailComponent,
     FlightListComponent,
     DepartureListComponent,
-    DepartureDetailComponent
+    DepartureDetailComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
