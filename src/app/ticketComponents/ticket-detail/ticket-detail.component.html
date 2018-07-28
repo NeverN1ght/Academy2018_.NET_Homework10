@@ -1,3 +1,59 @@
-<p>
-  ticket-detail works!
-</p>
+<br>
+
+<div *ngIf="ticket != undefined">
+
+  <div class="field">
+    <label>Id: {{ticket.id}}</label>
+  </div>
+
+  <div class="field">
+    <label>Price:</label>
+
+    <input 
+      [(ngModel)]="ticket.price" 
+      [readonly]="isReadonly"
+      class="form-control"
+      #priceInput = "ngModel"
+      required
+      pattern="^[1-9]|[0-3][0-9]$">
+
+      <div *ngIf="priceInput.invalid && priceInput.dirty">
+        <div *ngIf="priceInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="priceInput.errors.minlength" class="error">
+            Min value is 1
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Flight number:</label>
+
+    <input 
+      [(ngModel)]="ticket.flightNumber" 
+      [readonly]="isReadonly"
+      class="form-control"
+      #flightNumberInput = "ngModel"
+      required
+      minlength="5">
+
+      <div *ngIf="flightNumberInput.invalid && flightNumberInput.dirty">
+        <div *ngIf="flightNumberInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="flightNumberInput.errors.minlength" class="error">
+            Min length is 5
+        </div>
+      </div>
+  </div>
+
+</div>
+
+<br>
+
+<button class="btn btn-danger delete" (click)="deleteTicket()">Delete</button>
+
+<button class="btn btn-warning" (click)="editTicket()" *ngIf="isReadonly">Edit</button>
+<button class="btn btn-success" (click)="updateTicket(ticket.id)" *ngIf="!isReadonly">Save changes</button>
+

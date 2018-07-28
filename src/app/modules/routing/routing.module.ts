@@ -18,6 +18,7 @@ import { FlightListComponent } from '../../flightComponents/flight-list/flight-l
 import { FlightDetailComponent } from '../../flightComponents/flight-detail/flight-detail.component';
 import { DepartureListComponent } from '../../departureComponents/departure-list/departure-list.component';
 import { DepartureDetailComponent } from '../../departureComponents/departure-detail/departure-detail.component';
+import { StewardesseDetailComponent } from '../../stewardesseComponents/stewardesse-detail/stewardesse-detail.component';
 
 
 const routes: Routes = [
@@ -52,7 +53,7 @@ const routes: Routes = [
           },
           {
             path: ':id',
-            component: StewardesseListComponent 
+            component: StewardesseDetailComponent
           }
         ]
       },

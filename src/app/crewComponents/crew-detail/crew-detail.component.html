@@ -1,3 +1,175 @@
-<p>
-  crew-detail works!
-</p>
+<br>
+
+<div *ngIf="crew != undefined">
+  <h3>Id: {{crew.id}}</h3>
+  <h3>Pilot: </h3>
+  <div>
+      <div class="field">
+          <label>Id: {{crew.pilot.id}}</label>
+        </div>
+      
+        <div class="field">
+          <label>First Name:</label>
+      
+          <input 
+            [(ngModel)]="crew.pilot.firstName" 
+            [readonly]="isReadonly"
+            class="form-control"
+            #firstNameInput = "ngModel"
+            required
+            minlength="3">
+      
+            <div *ngIf="firstNameInput.invalid && firstNameInput.dirty">
+              <div *ngIf="firstNameInput.errors.required" class="error">
+                  Field can't be empty!
+              </div>
+              <div *ngIf="firstNameInput.errors.minlength" class="error">
+                  Min length is 3
+              </div>
+            </div>
+        </div>
+      
+        <div class="field">
+          <label>Last Name:</label>
+      
+          <input 
+            [(ngModel)]="crew.pilot.lastName" 
+            [readonly]="isReadonly"
+            class="form-control"
+            #lastNameInput = "ngModel"
+            required
+            minlength="3">
+      
+            <div *ngIf="lastNameInput.invalid && lastNameInput.dirty">
+              <div *ngIf="lastNameInput.errors.required" class="error">
+                  Field can't be empty!
+              </div>
+              <div *ngIf="lastNameInput.errors.minlength" class="error">
+                  Min length is 3
+              </div>
+            </div>
+        </div>
+      
+        <div class="field">
+          <label>Birthdate:</label>
+      
+          <input type="datetime" 
+            [(ngModel)]="crew.pilot.birthdate" 
+            [readonly]="isReadonly"
+            class="form-control"
+            #birthdateInput = "ngModel"
+            required
+            pattern="^\d{4}-\d{2}-\d{2}$">
+      
+            <div *ngIf="birthdateInput.invalid && birthdateInput.dirty">
+              <div *ngIf="birthdateInput.errors.required" class="error">
+                  Field can't be empty!
+              </div>
+              <div *ngIf="birthdateInput.errors.pattern" class="error">
+                  Wrong format (yyyy-mm-dd)
+              </div>
+            </div>
+        </div>
+      
+        <div class="field">
+          <label>Experience:</label>
+      
+          <input 
+            [(ngModel)]="crew.pilot.experience" 
+            [readonly]="isReadonly"
+            class="form-control"
+            #experienceInput = "ngModel"
+            required
+            pattern="^[1-9]|[0-3][0-9]$">
+      
+            <div *ngIf="experienceInput.invalid && experienceInput.dirty">
+              <div *ngIf="experienceInput.errors.required" class="error">
+                  Field can't be empty!
+              </div>
+              <div *ngIf="experienceInput.errors.pattern" class="error">
+                  Minimal value is 1
+              </div>
+            </div>
+        </div>
+  </div>
+  <!-- <h3>Stewardesses:</h3>
+  <div>
+        <div *ngFor="let stewardesse of crew.Stewardesses; let i = index;">
+            <div class="field">
+                <label>Id: {{crew.stewardesse[i].id}}</label>
+              </div>
+            
+              <div class="field">
+                <label>First Name:</label>
+            
+                <input 
+                  [(ngModel)]="crew.stewardesse[i].firstName" 
+                  [readonly]="isReadonly"
+                  class="form-control"
+                  #firstNameInput = "ngModel"
+                  required
+                  minlength="3">
+            
+                  <div *ngIf="firstNameInput.invalid && firstNameInput.dirty">
+                    <div *ngIf="firstNameInput.errors.required" class="error">
+                        Field can't be empty!
+                    </div>
+                    <div *ngIf="firstNameInput.errors.minlength" class="error">
+                        Min length is 3
+                    </div>
+                  </div>
+              </div>
+            
+              <div class="field">
+                <label>Last Name:</label>
+            
+                <input 
+                  [(ngModel)]="crew.stewardesse[i].lastName" 
+                  [readonly]="isReadonly"
+                  class="form-control"
+                  #lastNameInput = "ngModel"
+                  required
+                  minlength="3">
+            
+                  <div *ngIf="lastNameInput.invalid && lastNameInput.dirty">
+                    <div *ngIf="lastNameInput.errors.required" class="error">
+                        Field can't be empty!
+                    </div>
+                    <div *ngIf="lastNameInput.errors.minlength" class="error">
+                        Min length is 3
+                    </div>
+                  </div>
+              </div>
+            
+              <div class="field">
+                <label>Birthdate:</label>
+            
+                <input type="datetime" 
+                  [(ngModel)]="crew.stewardesse[i].birthdate" 
+                  [readonly]="isReadonly"
+                  class="form-control"
+                  #birthdateInput = "ngModel"
+                  required
+                  pattern="^\d{4}-\d{2}-\d{2}$">
+            
+                  <div *ngIf="birthdateInput.invalid && birthdateInput.dirty">
+                    <div *ngIf="birthdateInput.errors.required" class="error">
+                        Field can't be empty!
+                    </div>
+                    <div *ngIf="birthdateInput.errors.pattern" class="error">
+                        Wrong format (yyyy-mm-dd)
+                    </div>
+                  </div>
+              </div>
+        </div>
+  </div> -->
+
+</div>
+
+<br>
+
+<button class="btn btn-danger delete" (click)="deleteCrew()">Delete</button>
+
+<button class="btn btn-warning" (click)="editCrew()" *ngIf="isReadonly">Edit</button>
+<button class="btn btn-success" (click)="updateCrew(crew.id)" *ngIf="!isReadonly">Save changes</button>
+

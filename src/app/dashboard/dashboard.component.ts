@@ -13,6 +13,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
+  navigateToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+
   navigateToPilots() {
     this.router.navigate(['/dashboard/pilots']);
   }

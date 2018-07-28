@@ -1,37 +1,101 @@
 <br>
-<button (click)="createNewPilot()">Add new</button>
+<button (click)="createNewPilot()" class="btn btn-success">Create new</button>
+<br>
 
-<form *ngIf="isAdd" class="card" #form="ngForm">
-  <label>First Name</label>
-  <input 
-    #firstNameInput = "ngModel"
-    [(ngModel)]="newPilot.FirstName" 
-    name="firstNameInput"
-    required
-    minlength="3">
-  <div *ngIf="firstNameInput.invalid && firstNameInput.dirty">
-    <div *ngIf="firstNameInput.errors.required">
-        Field can't be empty!
-    </div>
-    <div *ngIf="firstNameInput.errors.minlength">
-        small string
+<form *ngIf="isAdd" #form="ngForm">
+  <div class="field">
+    <label>First name</label>
+    <input 
+      class="form-control"
+      #firstNameInput = "ngModel"
+      [(ngModel)]="newPilot.FirstName" 
+      name="firstNameInput"
+      required
+      minlength="3">
+
+    <div *ngIf="firstNameInput.invalid && firstNameInput.dirty">
+      <div *ngIf="firstNameInput.errors.required" class="error">
+          Field can't be empty!
+      </div>
+      <div *ngIf="firstNameInput.errors.minlength" class="error">
+          Min length is 3
+      </div>
     </div>
   </div>
-  <label>Last Name</label>
-  <input [(ngModel)]="newPilot.LastName" name="lastName">
-  <label>Birthdate</label>
-  <input [(ngModel)]="newPilot.Birthdate" name="birthdate">
-  <label>Experience</label>
-  <input [(ngModel)]="newPilot.Experience" name="experience">
-  <button (click)="addPilot(form)" type="submit">Add</button>
+
+  <div class="field">
+    <label>Last name</label>
+    <input 
+      class="form-control"
+      [(ngModel)]="newPilot.LastName" 
+      name="lastName"
+      #lastNameInput = "ngModel"
+      required
+      minlength="3">
+
+      <div *ngIf="lastNameInput.invalid && lastNameInput.dirty">
+        <div *ngIf="lastNameInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="lastNameInput.errors.minlength" class="error">
+            Min length is 3
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Birthdate</label>
+    <input 
+      class="form-control"
+      [(ngModel)]="newPilot.Birthdate" 
+      name="birthdate"
+      #birthdateInput = "ngModel"
+      pattern="^\d{4}-\d{2}-\d{2}$"
+      required>
+
+      <div *ngIf="birthdateInput.invalid && birthdateInput.dirty">
+        <div *ngIf="birthdateInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="birthdateInput.errors.pattern" class="error">
+            Wrong format (yyyy-mm-dd)
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Experience</label>
+    <input 
+      class="form-control"
+      [(ngModel)]="newPilot.Experience" 
+      name="experience"
+      #experienceInput = "ngModel"
+      required
+      pattern="^[1-9]|[0-3][0-9]$">
+
+      <div *ngIf="experienceInput.invalid && experienceInput.dirty">
+        <div *ngIf="experienceInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="experienceInput.errors.pattern" class="error">
+            Minimal value is 1
+        </div>
+      </div>
+  </div>
+  
+  <div class="field">
+    <button class="btn btn-success" (click)="addPilot(form)" type="submit">Add</button>
+  </div>
 </form>
 
-<table class="table">
-  <thead>
+<br>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
     <tr>
       <th>Id</th>
-      <th>First Name</th>
-      <th>Last Name</th>
+      <th>First name</th>
+      <th>Last name</th>
       <th>Birthdate</th>
       <th>Experience</th>
       <th></th>
@@ -44,7 +108,7 @@
       <td>{{pilot.lastName}}</td>
       <td>{{pilot.birthdate}}</td>
       <td>{{pilot.experience}}</td>
-      <td><button (click)="navigateToDetail(pilot.id)">Detail</button></td>
+      <td><button class="btn btn-info" (click)="navigateToDetail(pilot.id)">Detail</button></td>
     </tr>
   </tbody>
 </table>

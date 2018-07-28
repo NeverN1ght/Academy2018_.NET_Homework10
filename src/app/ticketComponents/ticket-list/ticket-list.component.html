@@ -1,3 +1,71 @@
-<p>
-  ticket-list works!
-</p>
+<br>
+<button (click)="createNewTicket()" class="btn btn-success">Create new</button>
+<br>
+
+<form *ngIf="isAdd" #form="ngForm">
+
+  <div class="field">
+    <label>Price</label>
+    <input 
+      class="form-control"
+      #priceInput = "ngModel"
+      [(ngModel)]="newTicket.Price" 
+      name="price"
+      required
+      pattern="^[1-9]|[0-3][0-9]$">
+
+    <div *ngIf="priceInput.invalid && priceInput.dirty">
+      <div *ngIf="priceInput.errors.required" class="error">
+          Field can't be empty!
+      </div>
+      <div *ngIf="priceInput.errors.pattern" class="error">
+          Min value is 1
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Flight number</label>
+    <input 
+      class="form-control"
+      [(ngModel)]="newTicket.FlightNumber" 
+      name="flightNumber"
+      #flightNumberInput = "ngModel"
+      required
+      minlength="5">
+
+      <div *ngIf="flightNumberInput.invalid && flightNumberInput.dirty">
+        <div *ngIf="flightNumberInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="flightNumberInput.errors.minlength" class="error">
+            Min length is 5
+        </div>
+      </div>
+  </div>
+  
+  <div class="field">
+    <button class="btn btn-success" (click)="addTicket(form)" type="submit">Add</button>
+  </div>
+</form>
+
+<br>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th>Id</th>
+      <th>Price</th>
+      <th>Flight number</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ticket of tickets">
+      <td>{{ticket.id}}</td>
+      <td>{{ticket.price}}</td>
+      <td>{{ticket.flightNumber}}</td>
+      <td><button class="btn btn-info" (click)="navigateToDetail(ticket.id)">Detail</button></td>
+    </tr>
+  </tbody>
+</table>

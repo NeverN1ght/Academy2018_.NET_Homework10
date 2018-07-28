@@ -1,19 +1,101 @@
 <br>
 
-<div *ngIf="pilot != undefined" class="card">
-  <label>Id: {{pilot.id}}</label>
-  <label>First Name:</label>
-  <input [(ngModel)]="pilot.firstName" [readonly]="isReadonly">
-  <label>Last Name:</label>
-  <input [(ngModel)]="pilot.lastName" [readonly]="isReadonly">
-  <label>Birthdate:</label>
-  <input type="datetime" [(ngModel)]="pilot.birthdate" [readonly]="isReadonly">
-  <label>Experience:</label>
-  <input [(ngModel)]="pilot.experience" [readonly]="isReadonly">
+<div *ngIf="pilot != undefined">
+
+  <div class="field">
+    <label>Id: {{pilot.id}}</label>
+  </div>
+
+  <div class="field">
+    <label>First Name:</label>
+
+    <input 
+      [(ngModel)]="pilot.firstName" 
+      [readonly]="isReadonly"
+      class="form-control"
+      #firstNameInput = "ngModel"
+      required
+      minlength="3">
+
+      <div *ngIf="firstNameInput.invalid && firstNameInput.dirty">
+        <div *ngIf="firstNameInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="firstNameInput.errors.minlength" class="error">
+            Min length is 3
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Last Name:</label>
+
+    <input 
+      [(ngModel)]="pilot.lastName" 
+      [readonly]="isReadonly"
+      class="form-control"
+      #lastNameInput = "ngModel"
+      required
+      minlength="3">
+
+      <div *ngIf="lastNameInput.invalid && lastNameInput.dirty">
+        <div *ngIf="lastNameInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="lastNameInput.errors.minlength" class="error">
+            Min length is 3
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Birthdate:</label>
+
+    <input type="datetime" 
+      [(ngModel)]="pilot.birthdate" 
+      [readonly]="isReadonly"
+      class="form-control"
+      #birthdateInput = "ngModel"
+      required
+      pattern="^\d{4}-\d{2}-\d{2}$">
+
+      <div *ngIf="birthdateInput.invalid && birthdateInput.dirty">
+        <div *ngIf="birthdateInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="birthdateInput.errors.pattern" class="error">
+            Wrong format (yyyy-mm-dd)
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Experience:</label>
+
+    <input 
+      [(ngModel)]="pilot.experience" 
+      [readonly]="isReadonly"
+      class="form-control"
+      #experienceInput = "ngModel"
+      required
+      pattern="^[1-9]|[0-3][0-9]$">
+
+      <div *ngIf="experienceInput.invalid && experienceInput.dirty">
+        <div *ngIf="experienceInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="experienceInput.errors.pattern" class="error">
+            Minimal value is 1
+        </div>
+      </div>
+  </div>
+
 </div>
 
-<button (click)="deletePilot()">Delete</button>
+<br>
 
-<button (click)="editPilot()" *ngIf="isReadonly">Edit</button>
-<button (click)="updatePilot(pilot.id)" *ngIf="!isReadonly">Save changes</button>
+<button class="btn btn-danger delete" (click)="deletePilot()">Delete</button>
+
+<button class="btn btn-warning" (click)="editPilot()" *ngIf="isReadonly">Edit</button>
+<button class="btn btn-success" (click)="updatePilot(pilot.id)" *ngIf="!isReadonly">Save changes</button>
 

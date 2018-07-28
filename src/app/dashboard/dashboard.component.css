@@ -1,4 +1,10 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-.navigation {
-    display: flex;
+
+header {
+    min-height: 100px;
+    background-color: rgb(155, 205, 252);
+}
+
+.fix {
+    margin-top: 25px;
 }

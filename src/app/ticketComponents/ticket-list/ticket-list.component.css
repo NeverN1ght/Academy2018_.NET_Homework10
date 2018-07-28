@@ -1,1 +1,18 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+
+.field {
+    display: flex;
+}
+
+.field label {
+    width: 150px;
+    font-size: 19px;
+}
+
+.field input {
+    width: 300px;
+}
+
+.error {
+    color: red;
+}

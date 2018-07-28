@@ -14,14 +14,27 @@ export class CrewListComponent implements OnInit {
   isAdd: boolean = false;
   newCrew: Crew = {
     Id: '',
-    Pilot: null,
+    Pilot: {
+      Id: 0,
+      FirstName: '',
+      LastName: '',
+      Birthdate: '',
+      Experience: ''
+    },
     Stewardesses: []
   };
+  
 
   constructor(private dataservice: CrewDataLoadService, private router: Router) { }
 
   ngOnInit() {
     this.dataservice.getCrews().subscribe(data => this.crews = data);
+    this.newCrew.Stewardesses.push({
+      Id: '',
+      FirstName: '',
+      Birthdate: '',
+      LastName: ''
+    });
   }
 
   createNewCrew() {

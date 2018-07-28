@@ -1,3 +1,92 @@
-<p>
-  stewardesse-list works!
-</p>
+<br>
+<button (click)="createNewStewardesse()" class="btn btn-success">Create new</button>
+<br>
+
+<form *ngIf="isAdd" #form="ngForm">
+  <div class="field">
+    <label>First name</label>
+    <input 
+      class="form-control"
+      #firstNameInput = "ngModel"
+      [(ngModel)]="newStewardesse.FirstName" 
+      name="firstNameInput"
+      required
+      minlength="3">
+
+    <div *ngIf="firstNameInput.invalid && firstNameInput.dirty">
+      <div *ngIf="firstNameInput.errors.required" class="error">
+          Field can't be empty!
+      </div>
+      <div *ngIf="firstNameInput.errors.minlength" class="error">
+          Min length is 3
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Last name</label>
+    <input 
+      class="form-control"
+      [(ngModel)]="newStewardesse.LastName" 
+      name="lastName"
+      #lastNameInput = "ngModel"
+      required
+      minlength="3">
+
+      <div *ngIf="lastNameInput.invalid && lastNameInput.dirty">
+        <div *ngIf="lastNameInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="lastNameInput.errors.minlength" class="error">
+            Min length is 3
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Birthdate</label>
+    <input 
+      class="form-control"
+      [(ngModel)]="newStewardesse.Birthdate" 
+      name="birthdate"
+      #birthdateInput = "ngModel"
+      pattern="^\d{4}-\d{2}-\d{2}$"
+      required>
+
+      <div *ngIf="birthdateInput.invalid && birthdateInput.dirty">
+        <div *ngIf="birthdateInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="birthdateInput.errors.pattern" class="error">
+            Wrong format (yyyy-mm-dd)
+        </div>
+      </div>
+  </div>
+  
+  <div class="field">
+    <button class="btn btn-success" (click)="addStewardesse(form)" type="submit">Add</button>
+  </div>
+</form>
+
+<br>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th>Id</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Birthdate</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stewardesse of stewardesses">
+      <td>{{stewardesse.id}}</td>
+      <td>{{stewardesse.firstName}}</td>
+      <td>{{stewardesse.lastName}}</td>
+      <td>{{stewardesse.birthdate}}</td>
+      <td><button class="btn btn-info" (click)="navigateToDetail(stewardesse.id)">Detail</button></td>
+    </tr>
+  </tbody>
+</table>
