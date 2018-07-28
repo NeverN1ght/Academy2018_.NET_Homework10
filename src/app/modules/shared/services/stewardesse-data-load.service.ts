@@ -32,11 +32,7 @@ export class StewardesseDataLoadService {
 
   updateStewardesseById(id: number, stewardesse: Stewardesse) {
     const headers = new HttpHeaders().set('content-type', 'application/json');
-    let body = {
-      firstName: stewardesse.FirstName,
-      lastName: stewardesse.LastName,
-      birthdate: stewardesse.Birthdate
-    };
+    let body = stewardesse;
     return this.http.put<Stewardesse>(BASE_URL + 'stewardesses/' + id, body, {
       headers
     });

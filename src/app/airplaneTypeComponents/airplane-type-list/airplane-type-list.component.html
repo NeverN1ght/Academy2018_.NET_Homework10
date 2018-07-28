@@ -1,34 +1,80 @@
 <br>
-<button (click)="createNewAirplaneType()">Add new</button>
+<button (click)="createNewAirplaneType()" class="btn btn-success">Create new</button>
+<br>
 
 <form *ngIf="isAdd" #form="ngForm">
-  <label>Airplane model</label>
-  <input 
-    name="airplaneModel"
-    #airplaneModelInput = "ngModel"
-    [(ngModel)]="newAirplaneType.airplaneModel" 
-    required
-    minlength="3">
-  <div *ngIf="airplaneModelInput.invalid && airplaneModelInput.dirty">
-    <div *ngIf="airplaneModelInput.errors.required">
-        Field can't be empty!
-    </div>
-    <div *ngIf="airplaneModelInput.errors.minlength">
-        small string
+  <div class="field">
+    <label>Airplane model</label>
+    <input 
+      class="form-control"
+      #airplaneModelInput = "ngModel"
+      [(ngModel)]="newAirplaneType.AirplaneModel" 
+      name="airplaneModelInput"
+      required
+      minlength="5">
+
+    <div *ngIf="airplaneModelInput.invalid && airplaneModelInput.dirty">
+      <div *ngIf="airplaneModelInput.errors.required" class="error">
+          Field can't be empty!
+      </div>
+      <div *ngIf="airplaneModelInput.errors.minlength" class="error">
+          Min length is 5
+      </div>
     </div>
   </div>
-  <label>Seats count</label>
-  <input [(ngModel)]="airplaneType.seatsCount" name="seatsCount">
-  <label>Carrying capacity</label>
-  <input [(ngModel)]="airplaneType.carryingCapacity" name="carryingCapacity">
-  <button (click)="addAirplaneType(form)" type="submit">Add</button>
+
+  <div class="field">
+    <label>Seats count</label>
+    <input 
+      class="form-control"
+      [(ngModel)]="newAirplaneType.SeatsCount" 
+      name="seatsCountInput"
+      #seatsCountInput = "ngModel"
+      required
+      pattern="^[1-9]|[0-3][0-9]$">
+
+      <div *ngIf="seatsCountInput.invalid && seatsCountInput.dirty">
+        <div *ngIf="seatsCountInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="seatsCountInput.errors.pattern" class="error">
+            Min value is 1
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Carrying capacity</label>
+    <input 
+      class="form-control"
+      [(ngModel)]="newAirplaneType.CarryingCapacity" 
+      name="carryingCapacity"
+      #carryingCapacityInput = "ngModel"
+      pattern="^[1-9]|[0-3][0-9]$"
+      required>
+
+      <div *ngIf="carryingCapacityInput.invalid && carryingCapacityInput.dirty">
+        <div *ngIf="carryingCapacityInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="carryingCapacityInput.errors.pattern" class="error">
+          Min value is 1
+        </div>
+      </div>
+  </div>
+  
+  <div class="field">
+    <button class="btn btn-success" (click)="addAirplaneType(form)" type="submit">Add</button>
+  </div>
 </form>
 
-<table class="table">
-  <thead>
+<br>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
     <tr>
       <th>Id</th>
-      <th>Airplane model/th>
+      <th>Airplane model</th>
       <th>Seats count</th>
       <th>Carrying capacity</th>
       <th></th>
@@ -40,7 +86,7 @@
       <td>{{airplaneType.airplaneModel}}</td>
       <td>{{airplaneType.seatsCount}}</td>
       <td>{{airplaneType.carryingCapacity}}</td>
-      <td><button (click)="navigateToDetail(airplaneType.id)">Detail</button></td>
+      <td><button class="btn btn-info" (click)="navigateToDetail(airplaneType.id)">Detail</button></td>
     </tr>
   </tbody>
 </table>

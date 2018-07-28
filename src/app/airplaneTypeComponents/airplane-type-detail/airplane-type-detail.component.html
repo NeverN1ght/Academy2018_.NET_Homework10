@@ -1,16 +1,83 @@
 <br>
 
 <div *ngIf="airplaneType != undefined">
-  <label>Id: {{airplaneType.id}}</label>
-  <label>Airplane model:</label>
-  <input [(ngModel)]="airplaneType.airplaneModel" [readonly]="isReadonly">
-  <label>Seats count:</label>
-  <input [(ngModel)]="airplaneType.seatsCount" [readonly]="isReadonly">
-  <label>Carrying capacity:</label>
-  <input [(ngModel)]="airplaneType.carryingCapacity" [readonly]="isReadonly">
+
+  <div class="field">
+    <label>Id: {{airplaneType.id}}</label>
+  </div>
+
+  <div class="field">
+    <label>Airplane model:</label>
+
+    <input 
+      [(ngModel)]="airplaneType.airplaneModel" 
+      [readonly]="isReadonly"
+      class="form-control"
+      #airplaneModelInput = "ngModel"
+      required
+      minlength="5">
+
+      <div *ngIf="airplaneModelInput.invalid && airplaneModelInput.dirty">
+        <div *ngIf="airplaneModelInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="airplaneModelInput.errors.minlength" class="error">
+            Min length is 5
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Seats count:</label>
+
+    <input 
+      [(ngModel)]="airplaneType.seatsCount" 
+      [readonly]="isReadonly"
+      class="form-control"
+      #seatsCountInput = "ngModel"
+      required
+      pattern="^[1-9]|[0-3][0-9]$">
+
+      <div *ngIf="seatsCountInput.invalid && seatsCountInput.dirty">
+        <div *ngIf="seatsCountInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="seatsCountInput.errors.pattern" class="error">
+            Min value is 1
+        </div>
+      </div>
+  </div>
+
+  <div class="field">
+    <label>Carrying capacity:</label>
+
+    <input 
+      [(ngModel)]="airplaneType.carryingCapacity" 
+      [readonly]="isReadonly"
+      class="form-control"
+      #carryingCapacityInput = "ngModel"
+      required
+      pattern="^[1-9]|[0-3][0-9]$">
+
+      <div *ngIf="carryingCapacityInput.invalid && carryingCapacityInput.dirty">
+        <div *ngIf="carryingCapacityInput.errors.required" class="error">
+            Field can't be empty!
+        </div>
+        <div *ngIf="carryingCapacityInput.errors.pattern" class="error">
+            Min value is 1
+        </div>
+      </div>
+  </div>
+
+  <br>
+
+<button class="btn btn-danger delete" (click)="deleteAirplaneType()">Delete</button>
+
+<button class="btn btn-warning" (click)="editAirplaneType()" *ngIf="isReadonly">Edit</button>
+<button class="btn btn-success" (click)="updateAirplaneType(airplaneType.id)" *ngIf="!isReadonly">Save changes</button>
 </div>
 
-<button (click)="deleteAirplaneType()">Delete</button>
+<h2 *ngIf="airplaneType == undefined">Not found!</h2>
 
-<button (click)="editAirplaneType()" *ngIf="isReadonly">Edit</button>
-<button (click)="updateAirplaneType(airplaneType.id)" *ngIf="!isReadonly">Save changes</button>
+
+

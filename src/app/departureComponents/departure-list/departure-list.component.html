@@ -1,3 +1,23 @@
-<p>
-  departure-list works!
-</p>
+
+<br>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th>Id</th>
+      <th>Flight number</th>
+      <th>Departure time</th>
+      <th>Crew id</th>
+      <th>Airplane id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let departure of departures">
+      <td>{{departure.id}}</td>
+      <td>{{departure.flightNumber}}</td>
+      <td>{{departure.departureTime}}</td>
+      <td>{{departure.crew.id}}</td>
+      <td>{{departure.airplane.id}}</td>
+    </tr>
+  </tbody>
+</table>

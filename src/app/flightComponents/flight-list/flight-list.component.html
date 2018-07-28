@@ -1,3 +1,24 @@
-<p>
-  flight-list works!
-</p>
+
+<br>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th>Number</th>
+      <th>Departure point</th>
+      <th>Destination point</th>
+      <th>Arrival time</th>
+      <th>Tickets</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let flight of flights">
+      <td>{{flight.number}}</td>
+      <td>{{flight.departurePoint}}</td>
+      <td>{{flight.destinationPoint}}</td>
+      <td>{{flight.arrivalTime}}</td>
+      <td>{{flight.tickets.length}}</td>
+    </tr>
+  </tbody>
+</table>
+

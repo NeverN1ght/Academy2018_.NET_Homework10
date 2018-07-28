@@ -31,10 +31,7 @@ export class TicketDataLoadService {
 
   updateTicketById(id: number, ticket: Ticket) {
     const headers = new HttpHeaders().set('content-type', 'application/json');
-    let body = {
-      price: ticket.Price,
-      flightNumber: ticket.FlightNumber
-    };
+    let body = ticket;
     return this.http.put<Ticket>(BASE_URL + 'tickets/' + id, body, {
       headers
     });

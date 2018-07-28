@@ -48,12 +48,12 @@
       </div>
   </div>
 
+  <br>
+  <button class="btn btn-danger delete" (click)="deleteTicket()">Delete</button>
+
+  <button class="btn btn-warning" (click)="editTicket()" *ngIf="isReadonly">Edit</button>
+  <button class="btn btn-success" (click)="updateTicket(ticket.id)" *ngIf="!isReadonly">Save changes</button>
 </div>
 
-<br>
 
-<button class="btn btn-danger delete" (click)="deleteTicket()">Delete</button>
-
-<button class="btn btn-warning" (click)="editTicket()" *ngIf="isReadonly">Edit</button>
-<button class="btn btn-success" (click)="updateTicket(ticket.id)" *ngIf="!isReadonly">Save changes</button>
-
+<h2 *ngIf="ticket == undefined">Not found!</h2>

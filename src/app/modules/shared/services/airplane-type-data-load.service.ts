@@ -32,11 +32,7 @@ export class AirplaneTypeDataLoadService {
 
   updateAirplaneTypeById(id: number, airplaneType: AirplaneType) {
     const headers = new HttpHeaders().set('content-type', 'application/json');
-    let body = {
-      airplaneModel: airplaneType.AirplaneModel,
-      seatsCount: airplaneType.SeatsCount,
-      carryingCapacity: airplaneType.CarryingCapacity
-    };
+    let body = airplaneType;
     return this.http.put<AirplaneType>(BASE_URL + 'airplanetypes/' + id, body, {
       headers
     });

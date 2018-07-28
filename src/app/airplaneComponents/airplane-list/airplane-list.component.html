@@ -1,50 +1,23 @@
+
 <br>
-<button (click)="createNewAirplane()">Add new</button>
 
-<form *ngIf="isAdd" #form="ngForm">
-  <label>Name</label>
-  <input 
-    #nameInput = "ngModel"
-    [(ngModel)]="newAirplane.Name" 
-    name="name"
-    required
-    minlength="3">
-  <div *ngIf="nameInput.invalid && nameInput.dirty">
-    <div *ngIf="nameInput.errors.required">
-        Field can't be empty!
-    </div>
-    <div *ngIf="nameInput.errors.minlength">
-        small string
-    </div>
-  </div>
-  <label>Type</label>
-  <input [(ngModel)]="newAirplane.Type" name="type">
-  <label>Expoitation term</label>
-  <input [(ngModel)]="newAirplane.ExploitationTerm" name="exploitationTerm">
-  <label>Release date</label>
-  <input [(ngModel)]="newAirplane.ReleaseDate" name="releaseDate">
-  <button (click)="addAirplane(form)" type="submit">Add</button>
-</form>
-
-<table class="table">
-  <thead>
+<table class="table table-bordered">
+  <thead class="thead-light">
     <tr>
       <th>Id</th>
       <th>Name</th>
       <th>Type</th>
-      <th>Exploitation term</th>
       <th>Release date</th>
-      <th></th>
+      <th>Exploitation term</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let airplane of airplanes">
       <td>{{airplane.id}}</td>
       <td>{{airplane.name}}</td>
-      <td>{{airplane.type}}</td>
-      <td>{{airplane.exploitationTerm}}</td>
+      <td>{{airplane.type.airplaneModel}}</td>
       <td>{{airplane.releaseDate}}</td>
-      <td><button (click)="navigateToDetail(airplane.id)">Detail</button></td>
+      <td>{{airplane.exploitationTerm}}</td>
     </tr>
   </tbody>
 </table>

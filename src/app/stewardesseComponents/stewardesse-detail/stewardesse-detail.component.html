@@ -69,13 +69,16 @@
       </div>
   </div>
 
-</div>
-
-<br>
+  <br>
 
 <button class="btn btn-danger delete" (click)="deleteStewardesse()">Delete</button>
 
 <button class="btn btn-warning" (click)="editStewardesse()" *ngIf="isReadonly">Edit</button>
 <button class="btn btn-success" (click)="updateStewardesse(stewardesse.id)" *ngIf="!isReadonly">Save changes</button>
+
+</div>
+
+<h2 *ngIf="stewardesse == undefined">Not found!</h2>
+
 
 

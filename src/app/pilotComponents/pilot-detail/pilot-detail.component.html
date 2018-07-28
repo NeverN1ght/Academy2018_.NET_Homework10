@@ -90,12 +90,11 @@
       </div>
   </div>
 
+  <br>
+  <button class="btn btn-danger delete" (click)="deletePilot()">Delete</button>
+
+  <button class="btn btn-warning" (click)="editPilot()" *ngIf="isReadonly">Edit</button>
+  <button class="btn btn-success" (click)="updatePilot(pilot.id)" *ngIf="!isReadonly">Save changes</button>
 </div>
 
-<br>
-
-<button class="btn btn-danger delete" (click)="deletePilot()">Delete</button>
-
-<button class="btn btn-warning" (click)="editPilot()" *ngIf="isReadonly">Edit</button>
-<button class="btn btn-success" (click)="updatePilot(pilot.id)" *ngIf="!isReadonly">Save changes</button>
-
+<h2 *ngIf="pilot == undefined">Not found!</h2>
